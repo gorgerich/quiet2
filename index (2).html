@@ -1,0 +1,365 @@
+import { useState } from "react";
+import { Card, CardContent } from "./ui/card";
+import { Button } from "./ui/button";
+import { Check, X } from "lucide-react";
+import {
+  Music,
+  Church,
+  Car,
+  Flower2,
+  Camera,
+  BookOpen,
+  Clock,
+  User,
+} from "lucide-react";
+
+interface AdditionalService {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  icon: any;
+}
+
+interface BaseService {
+  name: string;
+  included: boolean;
+}
+
+// Базовые обязательные услуги для каждого типа
+const baseServices: Record<string, BaseService[]> = {
+  burial: [
+    { name: "Гроб из массива сосны", included: true },
+    { name: "Транспортировка покойного", included: true },
+    { name: "Оформление документов", included: true },
+    { name: "Копка могилы", included: true },
+    { name: "Ритуальные принадлежности", included: true },
+    { name: "Венок из искусственных цветов", included: true },
+  ],
+  cremation: [
+    { name: "Транспортировка в крематорий", included: true },
+    { name: "Кремация", included: true },
+    { name: "Урна стандарт", included: true },
+    { name: "Документальное оформление", included: true },
+    { name: "Церемония прощания", included: true },
+  ],
+  care: [
+    { name: "Уборка территории захоронения", included: true },
+    { name: "Покраска оградки", included: true },
+    { name: "Обновление венков", included: true },
+    { name: "Уход за памятником", included: true },
+  ],
+};
+
+// Базовые цены для каждого типа услуги
+const basePrices: Record<string, number> = {
+  burial: 45000,
+  cremation: 25000,
+  care: 8000,
+};
+
+// Доступные дополнительные услуги
+const additionalServices: AdditionalService[] = [
+  {
+    id: "makeup",
+    name: "Услуги танатопрактика",
+    price: 8000,
+    description: "Подготовка тела покойного к прощанию",
+    icon: User,
+  },
+  {
+    id: "musician",
+    name: "Музыкальное сопровождение",
+    price: 5000,
+    description: "Живая музыка во время церемонии",
+    icon: Music,
+  },
+  {
+    id: "priest",
+    name: "Отпевание",
+    price: 7000,
+    description: "Религиозная церемония прощания",
+    icon: Church,
+  },
+  {
+    id: "transport-vip",
+    name: "VIP транспорт",
+    price: 12000,
+    description: "Транспортировка представительского класса",
+    icon: Car,
+  },
+  {
+    id: "flowers-extra",
+    name: "Дополнительные венки",
+    price: 4000,
+    description: "Композиции из живых цветов",
+    icon: Flower2,
+  },
+  {
+    id: "photographer",
+    name: "Фотограф",
+    price: 6000,
+    description: "Профессиональная фотосъемка церемонии",
+    icon: Camera,
+  },
+  {
+    id: "memorial-book",
+    name: "Книга памяти",
+    price: 3500,
+    description: "Индивидуально оформленная книга для записей",
+    icon: BookOpen,
+  },
+  {
+    id: "hall-extra",
+    name: "Дополнительные часы зала",
+    price: 3000,
+    description: "За каждый дополнительный час",
+    icon: Clock,
+  },
+];
+
+export function AdditionalServices() {
+  const [selectedCategory, setSelectedCategory] = useState<string>("burial");
+  const [selectedServices, setSelectedServices] = useState<Set<string>>(new Set());
+
+  const toggleService = (serviceId: string) => {
+    const newSelected = new Set(selectedServices);
+    if (newSelected.has(serviceId)) {
+      newSelected.delete(serviceId);
+    } else {
+      newSelected.add(serviceId);
+    }
+    setSelectedServices(newSelected);
+  };
+
+  const getSelectedServicesList = () => {
+    return additionalServices.filter((service) =>
+      selectedServices.has(service.id)
+    );
+  };
+
+  const calculateTotalPrice = () => {
+    const basePrice = basePrices[selectedCategory] || 0;
+    const additionalPrice = getSelectedServicesList().reduce(
+      (sum, service) => sum + service.price,
+      0
+    );
+    return basePrice + additionalPrice;
+  };
+
+  const handleCategoryChange = (category: string) => {
+    setSelectedCategory(category);
+    setSelectedServices(new Set()); // Сбрасываем выбранные услуги при смене категории
+  };
+
+  return (
+    <section className="py-24 px-4 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="mb-4">Дополнительные услуги</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Выберите базовый пакет и добавьте необходимые дополнительные услуги
+          </p>
+        </div>
+
+        <Card className="overflow-hidden">
+          <div className="grid md:grid-cols-12 min-h-[500px]">
+            {/* Левая колонка - Тип услуги */}
+            <div className="md:col-span-3 bg-gray-50 border-r">
+              <div className="p-6 border-b bg-white">
+                <h3 className="text-gray-500">Тип услуги</h3>
+              </div>
+              <div className="p-4 space-y-2">
+                <button
+                  onClick={() => handleCategoryChange("burial")}
+                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                    selectedCategory === "burial"
+                      ? "bg-gray-900 text-white"
+                      : "bg-white text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  Захоронение
+                </button>
+                <button
+                  onClick={() => handleCategoryChange("cremation")}
+                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                    selectedCategory === "cremation"
+                      ? "bg-gray-900 text-white"
+                      : "bg-white text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  Кремация
+                </button>
+                <button
+                  onClick={() => handleCategoryChange("care")}
+                  className={`w-full text-left px-4 py-3 rounded-lg transition-colors ${
+                    selectedCategory === "care"
+                      ? "bg-gray-900 text-white"
+                      : "bg-white text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  Уход за могилой
+                </button>
+              </div>
+            </div>
+
+            {/* Средняя колонка - Пакет услуг */}
+            <div className="md:col-span-4 border-r">
+              <div className="p-6 border-b bg-white">
+                <h3 className="text-gray-500">Пакет услуг</h3>
+              </div>
+              <div className="p-4">
+                {/* Базовые услуги */}
+                <div className="mb-6">
+                  <p className="text-gray-500 mb-3">Базовые услуги:</p>
+                  <ul className="space-y-2">
+                    {baseServices[selectedCategory]?.map((service, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-start gap-2 text-gray-700"
+                      >
+                        <Check className="h-4 w-4 text-gray-900 mt-0.5 flex-shrink-0" />
+                        <span>{service.name}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Выбранные дополнительные услуги */}
+                {selectedServices.size > 0 && (
+                  <div className="mb-6 pt-4 border-t">
+                    <p className="text-gray-500 mb-3">
+                      Дополнительные услуги:
+                    </p>
+                    <ul className="space-y-2">
+                      {getSelectedServicesList().map((service) => {
+                        const Icon = service.icon;
+                        return (
+                          <li
+                            key={service.id}
+                            className="flex items-start gap-2 text-gray-700"
+                          >
+                            <Icon className="h-4 w-4 text-gray-900 mt-0.5 flex-shrink-0" />
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center justify-between gap-2">
+                                <span>{service.name}</span>
+                                <span className="text-gray-500 whitespace-nowrap">
+                                  +{service.price.toLocaleString("ru-RU")} ₽
+                                </span>
+                              </div>
+                            </div>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Итоговая цена */}
+                <div className="pt-4 border-t mt-auto">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-gray-500">Базовая стоимость:</span>
+                    <span className="text-gray-700">
+                      {basePrices[selectedCategory].toLocaleString("ru-RU")} ₽
+                    </span>
+                  </div>
+                  {selectedServices.size > 0 && (
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-gray-500">Дополнительно:</span>
+                      <span className="text-gray-700">
+                        +
+                        {getSelectedServicesList()
+                          .reduce((sum, s) => sum + s.price, 0)
+                          .toLocaleString("ru-RU")}{" "}
+                        ₽
+                      </span>
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between pt-2 border-t">
+                    <span className="text-gray-900">Итого:</span>
+                    <span className="text-gray-900">
+                      {calculateTotalPrice().toLocaleString("ru-RU")} ₽
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Правая колонка - Дополнительные услуги */}
+            <div className="md:col-span-5">
+              <div className="p-6 border-b bg-white">
+                <h3 className="text-gray-500">Дополнительные услуги</h3>
+              </div>
+              <div className="p-4">
+                <div className="space-y-2">
+                  {additionalServices.map((service) => {
+                    const Icon = service.icon;
+                    const isSelected = selectedServices.has(service.id);
+                    return (
+                      <div
+                        key={service.id}
+                        onClick={() => toggleService(service.id)}
+                        className={`p-3 border rounded-lg cursor-pointer transition-all hover:border-gray-300 ${
+                          isSelected
+                            ? "border-gray-900 bg-gray-50"
+                            : "border-gray-200"
+                        }`}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div
+                            className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                              isSelected
+                                ? "bg-gray-900 text-white"
+                                : "bg-gray-100 text-gray-900"
+                            }`}
+                          >
+                            <Icon className="h-5 w-5" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-start justify-between gap-2 mb-1">
+                              <span className="text-gray-900">
+                                {service.name}
+                              </span>
+                              {isSelected ? (
+                                <Check className="h-5 w-5 text-gray-900 flex-shrink-0" />
+                              ) : (
+                                <span className="text-gray-900 whitespace-nowrap">
+                                  {service.price.toLocaleString("ru-RU")} ₽
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-gray-600">
+                              {service.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* Итоговая карточка */}
+        <Card className="mt-8 bg-gray-900 text-white border-0">
+          <CardContent className="p-6">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div>
+                <p className="text-gray-300 mb-1">Готовы оформить заказ?</p>
+                <p>Наш менеджер свяжется с вами для уточнения деталей</p>
+              </div>
+              <Button
+                size="lg"
+                className="bg-white text-gray-900 hover:bg-gray-100 whitespace-nowrap"
+              >
+                Оформить заказ
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </section>
+  );
+}
