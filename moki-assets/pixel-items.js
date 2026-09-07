@@ -1,0 +1,1 @@
+window.MOKI_ITEMS={};
