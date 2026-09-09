@@ -12,9 +12,9 @@ export async function boot(){
  }
  const room=images['environment.forest.base'];room.style.position='absolute';host.append(room);
  const props={};
- for(const [name,id] of [['moki','character.moki.idle'],['chest','prop.chest.closed'],['bag','prop.backpack']]){
+ for(const [name,id] of [['chest','prop.chest.closed'],['moki','character.moki.idle'],['bag','prop.backpack']]){
   const box=document.createElement('div'),shadow=document.createElement('div');
-  box.style.cssText='position:absolute;overflow:hidden';shadow.style.cssText='position:absolute;background:radial-gradient(ellipse,#36241950,transparent 70%);transform:translate(-50%,-50%)';
+  box.style.cssText='position:absolute;overflow:hidden';shadow.style.cssText='position:absolute;background:radial-gradient(ellipse,#36241965 0%,#36241926 35%,transparent 72%);transform:translate(-50%,-50%)';
   const im=images[id];im.style.position='absolute';box.append(im);host.append(shadow,box);props[name]={box,shadow,im,a:ASSETS[id]};
  }
  const foreground=document.createElement('div');foreground.style.cssText='position:absolute;overflow:hidden;pointer-events:none';
@@ -26,7 +26,7 @@ export async function boot(){
    const p=c[key],s=p.height/a.frame[3],width=a.frame[2]*s;
    Object.assign(box.style,{left:`${p.x-width/2}px`,top:`${p.y-p.height}px`,width:`${width}px`,height:`${p.height}px`});
    Object.assign(im.style,{left:`${-a.frame[0]*s}px`,top:`${-a.frame[1]*s}px`,width:`${a.size[0]*s}px`,height:`${a.size[1]*s}px`});
-   Object.assign(shadow.style,{left:`${p.x}px`,top:`${p.y-3}px`,width:`${width*.86}px`,height:`${p.height*.13}px`});
+   Object.assign(shadow.style,{left:`${p.x}px`,top:`${p.y-2}px`,width:`${width*.88}px`,height:`${p.height*.10}px`});
   }
   Object.assign(foreground.style,{left:`${c.left}px`,top:`${c.top+1210*c.scale}px`,width:`${1024*c.scale}px`,height:`${326*c.scale}px`});
   Object.assign(fg.style,{left:'0',top:`${-1210*c.scale}px`,width:`${1024*c.scale}px`,height:`${1536*c.scale}px`});

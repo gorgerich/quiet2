@@ -44,7 +44,7 @@ export async function boot(){
   const moki=sprite('character.moki.idle','CHARACTER');
   const bag=sprite('prop.backpack','WORLD_PROP');
   const chest=sprite('prop.chest.closed','WORLD_PROP');
-  layers.gameplay.addChild(moki,chest,bag);
+  layers.gameplay.addChild(chest,moki,bag);
   let renders=0,resizePending=0,disposed=false,measuring=false;
   let measureResult=null;
   const gl=renderer.gl;
