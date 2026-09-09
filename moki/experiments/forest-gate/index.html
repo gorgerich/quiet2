@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#342b25">
+  <meta name="robots" content="noindex,nofollow">
+  <title>MOKI · Forest Room · Visual Gate A</title>
+  <link rel="stylesheet" href="./review.css">
+</head>
+<body>
+  <main>
+    <section class="scene-shell" id="scene-shell" aria-label="Статическая лесная комната MOKI">
+      <div id="scene" role="img" aria-label="Моки сидит на мягком ковре в лесном доме. Рядом стоят красный рюкзак и закрытый деревянный сундук."></div>
+      <p id="loading" role="status">Готовим лесной дом…</p>
+      <section id="fatal" role="alert" hidden><h1>Комната пока не открылась</h1><p>Попробуйте открыть её снова.</p><pre id="error-detail"></pre><button id="retry">Повторить</button><p><a href="./composition.html">Открыть отдельный DOM-просмотр композиции</a></p></section>
+    </section>
+    <aside class="review-panel">
+      <p class="eyebrow">MOKI / VISUAL GATE A</p>
+      <h1>Лесной дом</h1>
+      <p>Проверяем только композицию, масштаб и качество арта. Моки, рюкзак и сундук — отдельные объекты WebGL.</p>
+      <p>Это статическая сцена для просмотра. Игровые действия здесь ещё не подключены.</p>
+      <fieldset><legend>Размер экрана</legend><div class="sizes">
+        <button data-size="375,812">375 × 812</button><button data-size="390,844" aria-pressed="true">390 × 844</button>
+        <button data-size="393,852">393 × 852</button><button data-size="430,932">430 × 932</button>
+        <button data-size="390,600">Короткий экран</button><button data-size="844,390">Альбомный</button>
+      </div></fieldset>
+      <details><summary>Техническая проверка</summary><pre id="diagnostics">Загрузка…</pre><button id="measure">Измерить 120 кадров</button><p>Измерение в этом браузере не заменяет тест на настоящем iPhone. В обычном статическом режиме цикл кадров остановлен.</p></details>
+      <p class="note">Production и сохранения не изменяются. Gate A ожидает визуального review.</p>
+    </aside>
+  </main>
+  <script type="module">
+    function fatal(error) {
+      console.error('[MOKI Forest Gate]', error);
+      document.querySelector('#loading').hidden=true;
+      document.querySelector('#fatal').hidden=false;
+      document.querySelector('#error-detail').textContent=`${error.name || 'Error'}: ${error.message || error}\n${error.stack || ''}`;
+    }
+    window.addEventListener('error', event=>fatal(event.error || Error(`${event.message} (${event.filename}:${event.lineno})`)));
+    window.addEventListener('unhandledrejection', event=>fatal(event.reason));
+    document.querySelector('#retry').addEventListener('click',()=>location.reload());
+    import('./scene.js').then(module=>module.boot()).catch(fatal);
+  </script>
+</body>
+</html>

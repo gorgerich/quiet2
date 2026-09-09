@@ -1,0 +1,1 @@
+{"name":"moki-forest-visual-gate","private":true,"version":"0.1.0","type":"module","scripts":{"build":"node build.mjs"},"dependencies":{"pixi.js":"8.7.0"}}

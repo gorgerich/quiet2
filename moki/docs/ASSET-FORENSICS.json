@@ -1,0 +1,618 @@
+{
+  "images": [
+    {
+      "file": "moki/assets/instructions-1.webp",
+      "dimensions": [
+        1086,
+        1448
+      ],
+      "alpha": false,
+      "type": "UI_ICON",
+      "sha256": "a8824a936e0d51adf3322f0010326b889e2600534db3faec7390b3d5164010a2",
+      "review": "visually inspected; preserve baseline; not approved for new world props"
+    },
+    {
+      "file": "moki/assets/objects.webp",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "alpha": true,
+      "type": "MIXED_ATLAS",
+      "sha256": "3bf026f2ebc338503f33480d49bf30cc79257029f70278cb6e95685800d88ccd",
+      "review": "visually inspected; preserve baseline; not approved for new world props"
+    },
+    {
+      "file": "moki/assets/room.webp",
+      "dimensions": [
+        1024,
+        1536
+      ],
+      "alpha": false,
+      "type": "ENVIRONMENT",
+      "sha256": "406d84a0ab8d608252b07e906e90ed79a63d291bbc3d3485ed4c9bcf9cbecc2e",
+      "review": "visually inspected; preserve baseline; not approved for new world props"
+    },
+    {
+      "file": "moki/assets/instructions-0.webp",
+      "dimensions": [
+        1086,
+        1448
+      ],
+      "alpha": false,
+      "type": "UI_ICON",
+      "sha256": "6f9f544bc7f011e3564a2c8684b462d5c9a2b794daa2b97bc011691e00324074",
+      "review": "visually inspected; preserve baseline; not approved for new world props"
+    },
+    {
+      "file": "moki/assets/instructions-2.webp",
+      "dimensions": [
+        1086,
+        1448
+      ],
+      "alpha": false,
+      "type": "UI_ICON",
+      "sha256": "dff0c8f53c31ef365b1059953d465f35e91ff41eece6ec5d5fb9fdff898ad88b",
+      "review": "visually inspected; preserve baseline; not approved for new world props"
+    },
+    {
+      "file": "moki/assets/worlds.webp",
+      "dimensions": [
+        1774,
+        887
+      ],
+      "alpha": false,
+      "type": "ENVIRONMENT",
+      "sha256": "4066fd601161f4a97c327c957f3c699a59f6ebbd59b9f40f8980a6f101f876b4",
+      "review": "visually inspected; preserve baseline; not approved for new world props"
+    },
+    {
+      "file": "moki/assets/companions.webp",
+      "dimensions": [
+        1499,
+        1049
+      ],
+      "alpha": true,
+      "type": "CHARACTER",
+      "sha256": "a08e31759320a6caaabd935381576e40ce80e6607680145300aa84d1c3e7a96d",
+      "review": "visually inspected; preserve baseline; not approved for new world props"
+    }
+  ],
+  "legacyCharacterFrames": [
+    {
+      "id": "moki.idle",
+      "legacyCSSFrame": [
+        25.183,
+        0,
+        299.8,
+        156
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "moki.happy",
+      "legacyCSSFrame": [
+        25.183,
+        157,
+        299.8,
+        156
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "moki.celebrate",
+      "legacyCSSFrame": [
+        25.183,
+        313,
+        299.8,
+        153
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "moki.helping",
+      "legacyCSSFrame": [
+        25.183,
+        463,
+        299.8,
+        152
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "moki.thinking",
+      "legacyCSSFrame": [
+        25.183,
+        615,
+        299.8,
+        153
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "moki.sleeping",
+      "legacyCSSFrame": [
+        25.183,
+        768,
+        299.8,
+        127
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "moki.excited",
+      "legacyCSSFrame": [
+        25.183,
+        892,
+        299.8,
+        157
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "tobi.idle",
+      "legacyCSSFrame": [
+        299.8,
+        0,
+        299.8,
+        156
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "tobi.happy",
+      "legacyCSSFrame": [
+        299.8,
+        157,
+        299.8,
+        156
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "tobi.celebrate",
+      "legacyCSSFrame": [
+        299.8,
+        313,
+        299.8,
+        153
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "tobi.helping",
+      "legacyCSSFrame": [
+        299.8,
+        463,
+        299.8,
+        152
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "tobi.thinking",
+      "legacyCSSFrame": [
+        299.8,
+        615,
+        299.8,
+        153
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "tobi.sleeping",
+      "legacyCSSFrame": [
+        299.8,
+        768,
+        299.8,
+        127
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "tobi.excited",
+      "legacyCSSFrame": [
+        299.8,
+        892,
+        299.8,
+        157
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "runi.idle",
+      "legacyCSSFrame": [
+        599.6,
+        0,
+        299.8,
+        156
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "runi.happy",
+      "legacyCSSFrame": [
+        599.6,
+        157,
+        299.8,
+        156
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "runi.celebrate",
+      "legacyCSSFrame": [
+        599.6,
+        313,
+        299.8,
+        153
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "runi.helping",
+      "legacyCSSFrame": [
+        599.6,
+        463,
+        299.8,
+        152
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "runi.thinking",
+      "legacyCSSFrame": [
+        599.6,
+        615,
+        299.8,
+        153
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "runi.sleeping",
+      "legacyCSSFrame": [
+        599.6,
+        768,
+        299.8,
+        127
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "runi.excited",
+      "legacyCSSFrame": [
+        599.6,
+        892,
+        299.8,
+        157
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "bip.idle",
+      "legacyCSSFrame": [
+        883.81,
+        0,
+        299.8,
+        156
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "bip.happy",
+      "legacyCSSFrame": [
+        883.81,
+        157,
+        299.8,
+        156
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "bip.celebrate",
+      "legacyCSSFrame": [
+        883.81,
+        313,
+        299.8,
+        153
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "bip.helping",
+      "legacyCSSFrame": [
+        883.81,
+        463,
+        299.8,
+        152
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "bip.thinking",
+      "legacyCSSFrame": [
+        883.81,
+        615,
+        299.8,
+        153
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "bip.sleeping",
+      "legacyCSSFrame": [
+        883.81,
+        768,
+        299.8,
+        127
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "bip.excited",
+      "legacyCSSFrame": [
+        883.81,
+        892,
+        299.8,
+        157
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "nori.idle",
+      "legacyCSSFrame": [
+        1174.017,
+        0,
+        299.8,
+        156
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "nori.happy",
+      "legacyCSSFrame": [
+        1174.017,
+        157,
+        299.8,
+        156
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "nori.celebrate",
+      "legacyCSSFrame": [
+        1174.017,
+        313,
+        299.8,
+        153
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "nori.helping",
+      "legacyCSSFrame": [
+        1174.017,
+        463,
+        299.8,
+        152
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "nori.thinking",
+      "legacyCSSFrame": [
+        1174.017,
+        615,
+        299.8,
+        153
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "nori.sleeping",
+      "legacyCSSFrame": [
+        1174.017,
+        768,
+        299.8,
+        127
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    },
+    {
+      "id": "nori.excited",
+      "legacyCSSFrame": [
+        1174.017,
+        892,
+        299.8,
+        157
+      ],
+      "use": "quarantined; not a pixel-exact production frame"
+    }
+  ],
+  "legacyObjectFrames": [
+    {
+      "id": "bag",
+      "legacyFrame": [
+        0.0,
+        0.0,
+        313.5,
+        313.5
+      ],
+      "type": "WORLD_PROP",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "chest",
+      "legacyFrame": [
+        313.5,
+        0.0,
+        313.5,
+        313.5
+      ],
+      "type": "WORLD_PROP",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "plant",
+      "legacyFrame": [
+        627.0,
+        0.0,
+        313.5,
+        313.5
+      ],
+      "type": "WORLD_PROP",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "lantern",
+      "legacyFrame": [
+        940.5,
+        0.0,
+        313.5,
+        313.5
+      ],
+      "type": "WORLD_PROP",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "bed",
+      "legacyFrame": [
+        0.0,
+        313.5,
+        313.5,
+        313.5
+      ],
+      "type": "WORLD_PROP",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "telescope",
+      "legacyFrame": [
+        313.5,
+        313.5,
+        313.5,
+        313.5
+      ],
+      "type": "WORLD_PROP",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "shelf",
+      "legacyFrame": [
+        627.0,
+        313.5,
+        313.5,
+        313.5
+      ],
+      "type": "WORLD_PROP",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "pet",
+      "legacyFrame": [
+        940.5,
+        313.5,
+        313.5,
+        313.5
+      ],
+      "type": "WORLD_PROP",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "hat",
+      "legacyFrame": [
+        0.0,
+        627.0,
+        313.5,
+        313.5
+      ],
+      "type": "ACCESSORY",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "glasses",
+      "legacyFrame": [
+        313.5,
+        627.0,
+        313.5,
+        313.5
+      ],
+      "type": "ACCESSORY",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "scarf",
+      "legacyFrame": [
+        627.0,
+        627.0,
+        313.5,
+        313.5
+      ],
+      "type": "ACCESSORY",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "trophy",
+      "legacyFrame": [
+        940.5,
+        627.0,
+        313.5,
+        313.5
+      ],
+      "type": "WORLD_PROP",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "brush",
+      "legacyFrame": [
+        0.0,
+        940.5,
+        313.5,
+        313.5
+      ],
+      "type": "UI_ICON",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "book",
+      "legacyFrame": [
+        313.5,
+        940.5,
+        313.5,
+        313.5
+      ],
+      "type": "UI_ICON",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "shirt",
+      "legacyFrame": [
+        627.0,
+        940.5,
+        313.5,
+        313.5
+      ],
+      "type": "UI_ICON",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    },
+    {
+      "id": "team",
+      "legacyFrame": [
+        940.5,
+        940.5,
+        313.5,
+        313.5
+      ],
+      "type": "UI_ICON",
+      "status": "quarantined alpha/crop; do not use in new scene"
+    }
+  ],
+  "newAuthoritativeManifest": "experiments/forest-gate/manifest.js",
+  "notes": [
+    "Old atlas cell division does not consistently match actual art bounds.",
+    "Worlds atlas: space [0,0,591,887], island [591,0,591,887], town [1182,0,592,887]. Space includes baked telescope; town includes chest.",
+    "Instructions sheets are 3 columns x 7 rows; nonuniform row bounds are defined in src/guidance.js. Not world props.",
+    "Scratch tobi.webp cannot be decoded, excluded. Scratch moki.webp and runi.webp not used in shipped module graph."
+  ]
+}
