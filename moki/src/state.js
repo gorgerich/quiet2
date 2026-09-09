@@ -1,8 +1,9 @@
+import {normalizeWorld} from './core/world-state.js';
 import {missions,characters,finds} from './catalog.js';
 export const KEY='moki_game_state';
 export const dateKey=(d=new Date())=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 const cleanNumber=x=>Math.max(0,Number.isFinite(Number(x))?Number(x):0);
-export function fresh(){return {schema:1,onboarded:false,child:{name:'Друг',character:'moki',theme:'forest',portrait:null,accessory:null,hp:0,collection:[],placed:[]},settings:{pinHash:null,pinSalt:null,sound:false,voice:false,calm:false,learnedControls:false,haptics:true,photoFamily:false},missionSettings:Object.fromEntries(missions.map(m=>[m.id,{enabled:['bag','room','reading'].includes(m.id),support:1}])),day:{date:dateKey(),completed:{},chestOpened:false},history:[],activeMission:null,family:{name:'Наша команда',members:[],goal:100,bossMax:100,bossBase:0,feed:[],challenge:null},onboarding:{step:0,support:1}};}
+export function fresh(){return {schema:1,world:normalizeWorld(),onboarded:false,child:{name:'Друг',character:'moki',theme:'forest',portrait:null,accessory:null,hp:0,collection:[],placed:[]},settings:{pinHash:null,pinSalt:null,sound:false,voice:false,calm:false,learnedControls:false,haptics:true,photoFamily:false},missionSettings:Object.fromEntries(missions.map(m=>[m.id,{enabled:['bag','room','reading'].includes(m.id),support:1}])),day:{date:dateKey(),completed:{},chestOpened:false},history:[],activeMission:null,family:{name:'Наша команда',members:[],goal:100,bossMax:100,bossBase:0,feed:[],challenge:null},onboarding:{step:0,support:1}};}
 export function load(storage){
  const read=k=>{try{return JSON.parse(storage.getItem(k)||'null')}catch{return null}};
  const current=read(KEY);const s=fresh();
@@ -34,7 +35,7 @@ export function load(storage){
  for(const m of missions){const v=s.missionSettings[m.id];s.missionSettings[m.id]={enabled:!!v?.enabled,support:[0,1,2].includes(v?.support)?v.support:1};}
  const a=s.activeMission;if(a){if(!missions.some(m=>m.id===a.id)||!Number.isInteger(a.step)||a.step<0||a.step>2||!['step','effort'].includes(a.phase)||s.day.completed[a.id])s.activeMission=null;else {a.hints=Array.isArray(a.hints)?a.hints.filter(h=>h&&[0,1,2].includes(h.step)&&[1,2,3].includes(h.level)):[];a.startedAt=Number.isFinite(a.startedAt)?a.startedAt:Date.now();}}
  s.child.name=String(s.child.name||'Друг').slice(0,24);s.family.members=s.family.members.filter(m=>m&&typeof m.id==='string').map(m=>({...m,name:String(m.name||'Участник').slice(0,24),hp:cleanNumber(m.hp)}));
- return s;
+ s.child.accessory=['hat','glasses','scarf'].includes(s.child.accessory)&&s.child.collection.includes(s.child.accessory)?s.child.accessory:null;s.child.theme=['forest','space','island','town'].includes(s.child.theme)?s.child.theme:'forest';s.world=normalizeWorld(s.world);return s;
 }
 export const enabled=s=>missions.filter(m=>s.missionSettings[m.id]?.enabled);
 export const completed=s=>Object.keys(s.day.completed).length;

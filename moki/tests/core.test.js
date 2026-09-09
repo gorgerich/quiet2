@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {BehaviorDirector,ACTOR_STATES} from '../src/core/director.js';
+import {fresh,start,advance,finish,openChest,load,KEY} from '../src/state.js';
+import {interactWorld,chapters,discoverStar} from '../src/core/world-state.js';
+import {SOUND_EVENTS} from '../src/core/audio.js';
+test('director notices, greets and varies idle without game mutations',()=>{const d=new BehaviorDirector();assert.equal(d.setContext({screen:'home',mission:true},0).state,'enter_room');assert.equal(d.update(800).state,'notice_player');assert.equal(d.update(1700).state,'greet');assert.equal(d.update(3100).state,'invite_mission');assert.equal(d.update(5400).state,'idle');assert.ok(Object.keys(ACTOR_STATES).length>=29);});
+test('director interruption and suspension do not advance while hidden',()=>{const d=new BehaviorDirector();d.setContext({screen:'home',mission:true},0);d.event('step',100);assert.equal(d.state,'small_success');d.suspend();assert.equal(d.update(50000),null);d.resume(50000);assert.equal(d.update(50500),null);});
+test('calm director settles and mission never loops invitations',()=>{const d=new BehaviorDirector();d.entered=true;d.context={screen:'home',calm:true,mission:true};assert.equal(d.update(0).state,'idle');d.context={screen:'mission',mission:true};assert.equal(d.update(9000).state,'waiting');});
+test('objects persist consequences without awarding HP; locks reject touches',()=>{const s=fresh();assert.equal(interactWorld(s,'plant'),null);s.child.collection=['plant','lantern','bed'];s.child.placed=[...s.child.collection];interactWorld(s,'plant');interactWorld(s,'lantern');assert.equal(s.world.waterings,1);assert.equal(s.world.lampOn,false);assert.equal(s.child.hp,0);const restored=load({getItem:k=>k===KEY?JSON.stringify(s):null});assert.equal(restored.world.lampOn,false);assert.equal(restored.world.waterings,1);});
+test('chapters use completed real missions; exploration is permanent, not currency',()=>{const s=fresh();assert.equal(chapters(s).index,0);for(const id of ['bag','room','reading']){start(s,id);advance(s);advance(s);advance(s);finish(s,'ok');}assert.equal(chapters(s).index,1);assert.equal(openChest(s)[0],'plant');for(let i=0;i<3;i++)assert.equal(discoverStar(s,i),true);assert.equal(discoverStar(s,0),false);assert.deepEqual(s.world.discoveries,['constellation']);assert.equal(s.child.hp,15);});
+test('game event audio vocabulary covers slice and stops short of rewards mutation',()=>{for(const e of ['mission.step.complete','mission.complete','hp.absorb','chest.open','character.greet','world.object.plant','boss.defeat'])assert.ok(SOUND_EVENTS[e]?.length);});
+
+test('imported accessory cannot inject markup into actor',()=>{const s=fresh();s.child.accessory='hat\" onerror=bad';const restored=load({getItem:k=>k===KEY?JSON.stringify(s):null});assert.equal(restored.child.accessory,null);});
