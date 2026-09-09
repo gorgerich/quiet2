@@ -1,0 +1,13 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {missions} from '../src/catalog.js';
+import {fresh,KEY,start,advance,help,load,next} from '../src/state.js';
+import {guidanceFor} from '../src/guidance.js';
+import {saveState,readState,BACKUP_KEY,exportProgress,importProgress} from '../src/persistence.js';
+import {createNarrator} from '../src/narration.js';
+const memory=()=>{const m=new Map();return{getItem:k=>m.get(k)||null,setItem:(k,v)=>m.set(k,v)}};
+test('every mission step has a unique visual instruction',()=>{const seen=new Set();for(const m of missions)for(let i=0;i<3;i++){const g=guidanceFor(m.id,i);assert.ok(g?.label);const key=`${g.sheet}/${g.row}/${g.step}`;assert.ok(!seen.has(key));seen.add(key)}assert.equal(seen.size,63)});
+test('pause resumes the same step across midnight instead of replacing it',()=>{const s=fresh();start(s,'bag',100);advance(s);help(s,2);s.day.date='2020-01-01';const saved=load({getItem:k=>k===KEY?JSON.stringify(s):null});assert.equal(next(saved,9).id,'bag');assert.equal(saved.activeMission.step,1);assert.equal(saved.activeMission.hints.length,1);assert.equal(start(saved,'room'),false);assert.equal(start(saved,'bag'),true)});
+test('corrupted current save recovers last good progress',()=>{const store=memory(),s=fresh();s.child.hp=12;saveState(store,s);s.child.hp=17;saveState(store,s);store.setItem(KEY,'{broken');const r=readState(store);assert.equal(r.recovered,true);assert.equal(r.state.child.hp,12);assert.ok(store.getItem(BACKUP_KEY))});
+test('export excludes portrait and PIN; import retains earned progress',()=>{const s=fresh();s.child.hp=18;s.child.portrait='private';s.settings.pinHash='secret';s.settings.pinSalt='salt';const raw=exportProgress(s);assert.ok(!raw.includes('private'));assert.ok(!raw.includes('secret'));const restored=importProgress(raw);assert.equal(restored.child.hp,18);assert.equal(restored.onboarded,false);assert.equal(restored.settings.pinHash,null);assert.throws(()=>importProgress('{"schema":1}'))});
+test('failed save reports failure',()=>{assert.equal(saveState({getItem:()=>null,setItem:()=>{throw Error('quota')}},fresh()),false)});
+test('narration never selects a remote voice or keeps stale utterances',()=>{let sent=[],cancelled=0;class U{constructor(text){this.text=text}}const synth={getVoices:()=>[{lang:'ru-RU',localService:false}],speak:u=>sent.push(u),cancel:()=>cancelled++};const n=createNarrator({synth,Utterance:U});assert.equal(n.say('Привет'),false);assert.equal(sent.length,0);synth.getVoices=()=>[{lang:'ru-RU',localService:true}];assert.equal(n.say('Один шаг'),true);n.say('Следующий');assert.equal(sent.length,2);assert.ok(cancelled>=3);n.stop()});

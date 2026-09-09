@@ -29,5 +29,14 @@ This is a substantial local-game implementation, not a declaration that every or
 - Offline reload/cache, remote backup/account recovery, and conflict-safe multi-device persistence are not implemented.
 - Character poses are static sprites with restrained motion, not rigged animation. Pixel-level atlas cleanup and device art review remain appropriate before mass release.
 
+## Visual guidance release — 2026-09-09
+- 63 illustrated actions for all 21 missions; explicit atlas row bounds prevent adjacent-step bleed.
+- One action at a time, touch/check rehearsal without HP, illustrated help, local Russian speech when installed.
+- Optional calm mode; bounded celebration; 500 ms duplicate-step guard independent of motion settings.
+- Active mission resumes after pause and midnight. Last-good local backup; adult export/import excludes portrait and PIN.
+- New pure guidance, narration, persistence modules. No extra renderer or observer patch.
+- Run `node --test tests/*.test.js`: 14 meaningful state, privacy, recovery and narration tests.
+- Speech needs an installed local Russian voice; no cloud speech fallback is used. Images remain available.
+
 ## Deployment
-Deploy exactly: index.html, manifest.webmanifest, src/{app,state,catalog}.js, src/game.css, assets/{companions,objects,room,worlds}.webp. Verify READY, exact production alias, build meta `unified-20260908`, file hashes, and visible production UI before claiming deployment.
+Deploy index.html, manifest.webmanifest, src/{app,state,catalog,guidance,narration,persistence}.js, src/game.css, all assets including controls/LICENSE. Exclude qa.html, qa-index.html and src/qa-app.js from production. Verify READY, exact alias, build meta visual-guidance-20260908, file hashes and visible UI. QA harness is preview-only.
